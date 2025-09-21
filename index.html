@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Jessi 💛</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #fff8dc, #fffacd, #fff0b3);
+      text-align: center;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      color: #444;
+    }
+    
+    .container {
+      max-width: 600px;
+      width: 100%;
+      padding: 25px;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(255, 204, 0, 0.25);
+      margin: 20px 0;
+    }
+    
+    h1 {
+      color: #e6b800;
+      font-size: 2.3rem;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    
+    p {
+      margin: 15px 0;
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+    
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 25px 0;
+      gap: 12px;
+    }
+    
+    button {
+      background: linear-gradient(to bottom, #ffdb4d, #ffcc00);
+      border: none;
+      padding: 14px 28px;
+      margin: 8px;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+      font-weight: 600;
+      min-width: 140px;
+      color: #333;
+    }
+    
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.18);
+      background: linear-gradient(to bottom, #ffe066, #ffd11a);
+    }
+    
+    button:active {
+      transform: translateY(1px);
+    }
+    
+    .ramo-container {
+      position: relative;
+      height: 300px;
+      margin: 30px 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    
+    .girasol {
+      position: absolute;
+      width: 120px;
+      height: 0;
+      display: flex;
+      justify-content: center;
+      transition: height 2s ease-in-out;
+    }
+    
+    .girasol:nth-child(1) {
+      left: 25%;
+      transform: translateX(-50%);
+    }
+    
+    .girasol:nth-child(2) {
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+    }
+    
+    .girasol:nth-child(3) {
+      left: 75%;
+      transform: translateX(-50%);
+    }
+    
+    .tallo {
+      position: absolute;
+      width: 8px;
+      height: 100%;
+      background: linear-gradient(to bottom, #7cb342, #558b2f);
+      border-radius: 5px;
+      bottom: 0;
+    }
+    
+    .hoja {
+      position: absolute;
+      width: 35px;
+      height: 22px;
+      background: #7cb342;
+      border-radius: 50% 0 50% 50%;
+      z-index: 1;
+    }
+    
+    .hoja.izquierda {
+      left: -12px;
+      top: 60%;
+      transform: rotate(-30deg);
+    }
+    
+    .hoja.derecha {
+      right: -12px;
+      top: 40%;
+      transform: rotate(120deg);
+      border-radius: 50% 50% 50% 0;
+    }
+    
+    .flor {
+      position: absolute;
+      top: 0;
+      width: 90px;
+      height: 90px;
+      background: #ffeb3b;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
+      transform-origin: center bottom;
+      animation: none;
+    }
+    
+    .centro {
+      width: 45px;
+      height: 45px;
+      background: #5d4037;
+      border-radius: 50%;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+    
+    .petalo {
+      position: absolute;
+      width: 30px;
+      height: 50px;
+      background: #ffd54f;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    }
+    
+    #mensaje {
+      font-size: 1.1rem;
+      margin: 20px 0;
+      color: #444;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+      line-height: 1.6;
+      padding: 0 10px;
+      text-align: left;
+      background: rgba(255, 248, 225, 0.7);
+      border-radius: 15px;
+      padding: 20px;
+    }
+    
+    .pregunta {
+      display: none;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    
+    .pregunta.activa {
+      display: block;
+    }
+    
+    .corazon {
+      color: #ff4d4d;
+      display: inline-block;
+    }
+    
+    .progreso {
+      width: 100%;
+      height: 8px;
+      background: #ffe6b3;
+      border-radius: 4px;
+      margin: 20px 0;
+      overflow: hidden;
+    }
+    
+    .barra-progreso {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(to right, #ffcc00, #ffdb4d);
+      border-radius: 4px;
+      transition: width 0.5s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes mecer {
+      0% { transform: translateX(0) rotate(0deg); }
+      25% { transform: translateX(-2px) rotate(-1deg); }
+      50% { transform: translateX(0) rotate(0deg); }
+      75% { transform: translateX(2px) rotate(1deg); }
+      100% { transform: translateX(0) rotate(0deg); }
+    }
+    
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.9rem;
+      }
+      
+      button {
+        padding: 12px 24px;
+        font-size: 1rem;
+        min-width: 120px;
+      }
+      
+      #mensaje {
+        font-size: 1rem;
+      }
+      
+      .container {
+        padding: 20px 15px;
+      }
+      
+      .girasol {
+        width: 100px;
+      }
+      
+      .flor {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .centro {
+        width: 40px;
+        height: 40px;
+      }
+      
+      .petalo {
+        width: 25px;
+        height: 45px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="pregunta activa" id="pregunta1">
+      <h1>Hola Jessi</h1>
+      <p>¿Sabes qué día es hoy?</p>
+      <div class="btn-container">
+        <button onclick="responder('si', 1)">Obvio que si</button>
+        <button onclick="responder('no', 1)">No, no lo sé</button>
+      </div>
+    </div>
+    
+    <div class="pregunta" id="pregunta2">
+      <h1>¿Te gustaria tener un ramo de flores?</h1>
+      <p>Te mereces muchos no solo uno</p>
+      <div class="btn-container">
+        <button onclick="responder('razones', 2)">Dime por qué!</button>
+        <button onclick="responder('aceptar', 2)">Lose</button>
+      </div>
+    </div>
+    
+    <div class="pregunta" id="pregunta3">
+      <h1>Aceptas este humilde ramo?</h1>
+      <p>Se que no es uno real como querias, pero lo estoy haciendo con mucho amor y prometo darte uno bien cuando nos veamos</p>
+      <div class="btn-container">
+        <button onclick="mostrarRamoFinal()">Siiii</button>
+        <button onclick="insistir()">No, gracias</button>
+      </div>
+    </div>
+    
+    <div class="progreso">
+      <div class="barra-progreso" id="barraProgreso"></div>
+    </div>
+    
+    <div class="ramo-container" id="ramoContainer">
+      <div class="girasol" id="girasol1">
+        <div class="tallo"></div>
+        <div class="hoja izquierda"></div>
+        <div class="hoja derecha"></div>
+        <div class="flor">
+          <div class="centro"></div>
+          <div class="petalo" style="transform: rotate(0deg); top: -20px;"></div>
+          <div class="petalo" style="transform: rotate(45deg); top: -12px; right: -4px;"></div>
+          <div class="petalo" style="transform: rotate(90deg); top: 8px; right: -16px;"></div>
+          <div class="petalo" style="transform: rotate(135deg); top: 32px; right: -12px;"></div>
+          <div class="petalo" style="transform: rotate(180deg); top: 44px; right: 4px;"></div>
+          <div class="petalo" style="transform: rotate(225deg); top: 44px; left: 4px;"></div>
+          <div class="petalo" style="transform: rotate(270deg); top: 32px; left: -12px;"></div>
+          <div class="petalo" style="transform: rotate(315deg); top: 8px; left: -16px;"></div>
+          <div class="petalo" style="transform: rotate(360deg); top: -12px; left: -4px;"></div>
+        </div>
+      </div>
+      
+      <div class="girasol" id="girasol2">
+        <div class="tallo"></div>
+        <div class="hoja izquierda"></div>
+        <div class="hoja derecha"></div>
+        <div class="flor">
+          <div class="centro"></div>
+          <div class="petalo" style="transform: rotate(0deg); top: -20px;"></div>
+          <div class="petalo" style="transform: rotate(45deg); top: -12px; right: -4px;"></div>
+          <div class="petalo" style="transform: rotate(90deg); top: 8px; right: -16px;"></div>
+          <div class="petalo" style="transform: rotate(135deg); top: 32px; right: -12px;"></div>
+          <div class="petalo" style="transform: rotate(180deg); top: 44px; right: 4px;"></div>
+          <div class="petalo" style="transform: rotate(225deg); top: 44px; left: 4px;"></div>
+          <div class="petalo" style="transform: rotate(270deg); top: 32px; left: -12px;"></div>
+          <div class="petalo" style="transform: rotate(315deg); top: 8px; left: -16px;"></div>
+          <div class="petalo" style="transform: rotate(360deg); top: -12px; left: -4px;"></div>
+        </div>
+      </div>
+      
+      <div class="girasol" id="girasol3">
+        <div class="tallo"></div>
+        <div class="hoja izquierda"></div>
+        <div class="hoja derecha"></div>
+        <div class="flor">
+          <div class="centro"></div>
+          <div class="petalo" style="transform: rotate(0deg); top: -20px;"></div>
+          <div class="petalo" style="transform: rotate(45deg); top: -12px; right: -4px;"></div>
+          <div class="petalo" style="transform: rotate(90deg); top: 8px; right: -16px;"></div>
+          <div class="petalo" style="transform: rotate(135deg); top: 32px; right: -12px;"></div>
+          <div class="petalo" style="transform: rotate(180deg); top: 44px; right: 4px;"></div>
+          <div class="petalo" style="transform: rotate(225deg); top: 44px; left: 4px;"></div>
+          <div class="petalo" style="transform: rotate(270deg); top: 32px; left: -12px;"></div>
+          <div class="petalo" style="transform: rotate(315deg); top: 8px; left: -16px;"></div>
+          <div class="petalo" style="transform: rotate(360deg); top: -12px; left: -4px;"></div>
+        </div>
+      </div>
+    </div>
+    
+    <div id="mensaje"></div>
+  </div>
+
+  <script>
+    // Variables globales
+    let preguntaActual = 1;
+    const totalPreguntas = 3;
+    
+    // Función para manejar las respuestas
+    function responder(respuesta, numeroPregunta) {
+      // Si estamos en la pregunta 1
+      if (numeroPregunta === 1) {
+        if (respuesta === 'no') {
+          document.getElementById('pregunta1').querySelector('p').innerHTML = 
+            "La verdad ni yo sé, solo sé que se le regalan flores a las personas que quieres mucho";
+        } else {
+          avanzarPregunta();
+        }
+      }
+      
+      // Si estamos en la pregunta 2
+      if (numeroPregunta === 2) {
+        if (respuesta === 'razones') {
+          document.getElementById('pregunta2').querySelector('p').innerHTML = 
+            "Porque sos la Mejorrr ";
+        } else {
+          avanzarPregunta();
+        }
+      }
+    }
+    
+    // Función para avanzar a la siguiente pregunta
+    function avanzarPregunta() {
+      // Avanzar la barra de progreso
+      const barraProgreso = document.getElementById('barraProgreso');
+      barraProgreso.style.width = (preguntaActual / totalPreguntas * 100) + '%';
+      
+      // Ocultar pregunta actual
+      document.getElementById('pregunta' + preguntaActual).classList.remove('activa');
+      
+      // Avanzar a la siguiente pregunta
+      preguntaActual++;
+      
+      if (preguntaActual <= totalPreguntas) {
+        setTimeout(() => {
+          document.getElementById('pregunta' + preguntaActual).classList.add('activa');
+        }, 400);
+      }
+    }
+    
+    // Función para mostrar el ramo final
+    function mostrarRamoFinal() {
+      // Completar la barra de progreso
+      document.getElementById('barraProgreso').style.width = '100%';
+      
+      // Ocultar todas las preguntas
+      for (let i = 1; i <= totalPreguntas; i++) {
+        document.getElementById('pregunta' + i).classList.remove('activa');
+      }
+      
+      // Mostrar el ramo con animación
+      const girasol1 = document.getElementById('girasol1');
+      const girasol2 = document.getElementById('girasol2');
+      const girasol3 = document.getElementById('girasol3');
+      const flores = document.querySelectorAll('.flor');
+      const mensaje = document.getElementById('mensaje');
+      
+      // Hacer crecer los girasoles desde abajo
+      girasol1.style.height = '250px';
+      
+      setTimeout(() => {
+        girasol2.style.height = '270px';
+        
+        setTimeout(() => {
+          girasol3.style.height = '260px';
+          
+          // Agregar animación de mecido a todas las flores
+          setTimeout(() => {
+            flores.forEach(flor => {
+              flor.style.animation = 'mecer 4s ease-in-out infinite';
+            });
+            
+            // Mostrar mensaje
+            setTimeout(() => {
+              mensaje.innerHTML = `
+                Sé que querías un ramo real y yo te doy este a través de una pantalla :( Lo siento... Lo cierto es que hace mucho no nos vemos en persona pero eso no impide que tengas tus flores amarillas.<br><br>
+                En fin, eres una increíble persona y amiga y agradezco haberte conocido. Te mereces todo.<br><br>
+                <span class="corazon">💛</span>
+              `;
+              mensaje.style.opacity = "1";
+            }, 1000);
+          }, 500);
+        }, 300);
+      }, 300);
+    }
+    
+    // Función para insistir cuando dice "No, gracias"
+    function insistir() {
+      alert("ayyy :( \n\nPiensa que es un ramo muy especial...");
+    }
+  </script>
+</body>
+</html>
